@@ -1,43 +1,41 @@
-class bank_account():
-    def __init__(self, name, amount):
-        self.name = name
-        self.amount = amount
-    def deposite(self, amt):
-        self.amount += amt
-        print(f'your account balance after deposite: {self.amount}')
-    def withdraw(self, amt):
-        if(self.amount < amt):
-            print('Insufficient funds')
-            return
-        self.amount -= amt
-        print(f'your account balance after withdrawal: {self.amount}')
-    def display(self):
-        print("Net Available Balance: ", self.amount)
-    def __str__(self):
-        return f'account holder: {self.name}, amount: {self.amount}'
-
-b = bank_account('Bhavana', 1000)
-switcher = {
-    'd': 
-        b.deposite,
-    'w': 
-        b.withdraw,
-    'a':
-        b.display,
-    'p':
-        b
-}
-while(True):
-    s =  input('deposite: d, withdrawal: w , display amount: a, print: p, 0: exit  ')
-    if(s == '0'):
-        print('Thank You')
-        break
-    else:
-        func = switcher.get(s)
-        if(func == b.display):
-            func()
-        if(func == b):
-            print(b)
+class Bank_Account():
+    def __init__(self, name, balance):
+        self.name=name
+        self.balance=balance
+    def withdraw(self, amount):
+        if(self.balance < amount):
+            print(f"insufficient funds, Available balance is: {self.balance}")
         else:
-            amt = float(input("Enter amount "))
-            func(amt)
+            self.balance -= amount
+            print(f"Available balance after withdrawal: {self.balance}")
+
+    def deposite(self, amount):
+        self.balance+=amount
+        print(f"Available balance after deposit: {self.balance}")
+    
+    def __str__(self):
+        return f"name: {self.name}, available balance: {self.balance}"
+
+account = Bank_Account("Bhavana", 10000)
+print(f"Account Created, name: {account.name}, available balance: {account.balance}")
+def switch():
+    while(True):
+        print("Press d for Deposit\npress w for Withdraw \npress p for display account\npress e for Exit ")
+        option = input("your option : ")
+        if option == 'd':
+            amount=(int(input("enter the amount to be deposited: ")))
+            account.deposite(amount)
+            continue
+        elif option == 'w':
+            amount=(int(input("enter the amount to be withdrawn: ")))
+            account.withdraw(amount)
+            continue
+        elif option == 'p':
+            print(account)
+            continue
+        elif option == 'e':
+            print("Thank You")
+            break
+        else:
+            print("Incorrect option")
+switch()    
